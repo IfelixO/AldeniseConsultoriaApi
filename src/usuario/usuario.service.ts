@@ -48,7 +48,6 @@ export class UsuarioService {
   }
 
   async adicionar(data: UsuarioAdicionarDto): Promise<Usuario | ResultadoDto> {
-    console.log(data)
     let usuario = new Usuario();
     let separacaoNome = data.nome.split(' ');
     let separacaoTelefone = data.telefone.split('-');
