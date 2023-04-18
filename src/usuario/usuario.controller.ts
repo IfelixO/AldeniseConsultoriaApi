@@ -78,10 +78,8 @@ export class UsuarioController {
   }
 
   @Post('adicionar')
-  async adicionar(
-    @Body() data: UsuarioAdicionarDto,
-  ): Promise<Usuario | ResultadoDto> {
-    console.log(data)
+  async adicionar(@Req() data: any): Promise<Usuario | ResultadoDto> {
+    console.log(data);
 
     return this.usuarioService.adicionar(data);
   }
