@@ -5,6 +5,7 @@ export const databaseProviders = [
     provide: 'DATABASE_CONNECTION',
       useFactory: async () => await createConnection({
         type: 'postgres',
+        ssl: true,
         host: 'ep-aged-waterfall-101157.us-east-2.aws.neon.tech',
         port: 5432,
         username: 'IfelixO',
