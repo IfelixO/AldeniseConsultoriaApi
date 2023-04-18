@@ -11,8 +11,8 @@ export class AnotacoesService {
     private anotacoesRepository: Repository<Anotacoes>,
   ) {}
 
-  async listar(data: any): Promise<Anotacoes> {
-    let anotacoes = this.anotacoesRepository.findOne({ id: data });
+  async listar(data: number): Promise<Anotacoes> {
+    let anotacoes = this.anotacoesRepository.findOneBy ({ id: data });
     return anotacoes;
   }
 

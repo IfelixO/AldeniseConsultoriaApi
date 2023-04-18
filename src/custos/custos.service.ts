@@ -12,7 +12,7 @@ export class CustosService {
   ) {}
 
   async listar(data: any): Promise<Custos> {
-    return this.custosRepository.findOne({ id: data });
+    return this.custosRepository.findOneBy ({ id: data });
   }
 
   async atualizar(data: any): Promise<ResultadoDto> {

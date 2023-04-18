@@ -14,7 +14,7 @@ export class MetaService {
     ) {}
 
   async achar(data : number): Promise<Meta | undefined> {
-    let meta: Meta = await this.metaRepository.findOne({id: data})
+    let meta: Meta = await this.metaRepository.findOneBy  ({id: data})
     if (meta){
     return meta
     } else {

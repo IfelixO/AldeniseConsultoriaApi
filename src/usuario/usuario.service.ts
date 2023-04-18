@@ -13,7 +13,7 @@ export class UsuarioService {
   ) {}
 
   async loginAdm(adm: any): Promise<any> {
-    return this.usuarioRepository.findOne({id: 1}).then((res)=>{
+    return this.usuarioRepository.findOneBy ({id: 1}).then((res)=>{
       if(bcrypt.compareSync(adm.senha, res.senha)){
         return <ResultadoDto>{
           status: true,
@@ -78,16 +78,16 @@ export class UsuarioService {
   }
 
   async findOne(login: string): Promise<Usuario | undefined> {
-    return this.usuarioRepository.findOne({ login: login });
+    return this.usuarioRepository.findOneBy ({ login: login });
   }
 
   async findCod(codigo: string): Promise<Usuario | undefined> {
-    return this.usuarioRepository.findOne({ codigo: codigo });
+    return this.usuarioRepository.findOneBy ({ codigo: codigo });
   }
 
   async findId(id: number): Promise<Usuario | undefined> {
     return this.usuarioRepository
-      .findOne({ id: id })
+      .findOneBy ({ id: id })
       .then((res) => {
         let usuario = {
           id: res.id,

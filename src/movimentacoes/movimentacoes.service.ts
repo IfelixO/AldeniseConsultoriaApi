@@ -12,7 +12,7 @@ export class MovimentacoesService {
   ) {}
 
   async listar(data: any): Promise<Movimentacoes> {
-    let movimentacoes = this.movimentacoesRepository.findOne({id: data})
+    let movimentacoes = this.movimentacoesRepository.findOneBy({id: data})
     return movimentacoes
   }
 

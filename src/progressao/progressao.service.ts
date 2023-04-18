@@ -12,7 +12,7 @@ export class ProgressaoService {
   ) {}
 
   async listar(data: any): Promise<Progressao> {
-    let progressao = this.progressaoRepository.findOne({id: data})
+    let progressao = this.progressaoRepository.findOneBy ({id: data})
     return progressao
   }
 

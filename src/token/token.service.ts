@@ -18,7 +18,7 @@ export class TokenService {
   ) {}
 
     async salvar(hash: string, usuario: string ){
-      let objToken = await this.tokenRepository.findOne({usuario: usuario})
+      let objToken = await this.tokenRepository.findOneBy ({usuario: usuario})
       if (objToken){
           this.tokenRepository.update(objToken.id, {
           hash: hash
@@ -33,7 +33,7 @@ export class TokenService {
     }
 
     async atualizarToken(tokenAntigo: string){
-      let objToken = await this.tokenRepository.findOne({hash: tokenAntigo})
+      let objToken = await this.tokenRepository.findOneBy ({hash: tokenAntigo})
       if  (objToken) {
         let usuario = await this.usuarioService.findOne(objToken.usuario)
         // console.log(usuario)
@@ -46,7 +46,7 @@ export class TokenService {
     }
 
     async acharUsuarioPorToken(token: string): Promise<Usuario> {
-      let objToken: Token = await this.tokenRepository.findOne({hash: token})
+      let objToken: Token = await this.tokenRepository.findOneBy ({hash: token})
       if  (objToken) {
         let usuario = await this.usuarioService.findOne(objToken.usuario)
       return usuario
