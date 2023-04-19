@@ -4,6 +4,9 @@ import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
 export class Custos {
   @PrimaryGeneratedColumn()
   id: number;
+  
+  @Column()
+  usuario: number;
 
   @Column()
   receita: string;

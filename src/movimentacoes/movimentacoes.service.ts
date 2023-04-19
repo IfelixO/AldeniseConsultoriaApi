@@ -103,8 +103,41 @@ export class MovimentacoesService {
 
   async adicionar(data: MovimentacoesDto): Promise<ResultadoDto> {
     let movimentacoes = new Movimentacoes()
-    movimentacoes.id = data.id
-    return this.movimentacoesRepository.insert(movimentacoes)
+    movimentacoes.usuario = data.id
+    movimentacoes.entrada1 = ''
+    movimentacoes.entrada2 = ''
+    movimentacoes.entrada3 = ''
+    movimentacoes.entrada4 = ''
+    movimentacoes.entrada5 = ''
+    movimentacoes.entrada6 = ''
+    movimentacoes.entrada7 = ''
+    movimentacoes.entrada8 = ''
+    movimentacoes.entrada9 = ''
+    movimentacoes.entrada10 = ''
+    movimentacoes.entrada11 = ''
+    movimentacoes.entrada12 = ''
+    movimentacoes.entrada13 = ''
+    movimentacoes.entrada14 = ''
+    movimentacoes.entrada15 = ''
+    movimentacoes.entrada16 = ''
+    movimentacoes.entrada17 = ''
+    movimentacoes.entrada18 = ''
+    movimentacoes.entrada19 = ''
+    movimentacoes.entrada20 = ''
+    movimentacoes.entrada21 = ''
+    movimentacoes.entrada22 = ''
+    movimentacoes.entrada23 = ''
+    movimentacoes.entrada24 = ''
+    movimentacoes.entrada25 = ''
+    movimentacoes.entrada26 = ''
+    movimentacoes.entrada27 = ''
+    movimentacoes.entrada28 = ''
+    movimentacoes.entrada29 = ''
+    movimentacoes.entrada30 = ''
+    movimentacoes.entrada31 = ''
+    movimentacoes.entrada32 = ''
+
+    return this.movimentacoesRepository.save(movimentacoes)
     .then((res) => {
       return <ResultadoDto>{
         status: true,

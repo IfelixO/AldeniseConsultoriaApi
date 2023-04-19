@@ -1,6 +1,7 @@
 
 export interface CustosDto{
     id: number;
+    usuario: number;
     receita: string;
     despesa1: string;
     despesa2: string;

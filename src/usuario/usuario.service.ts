@@ -12,20 +12,102 @@ export class UsuarioService {
     private usuarioRepository: Repository<Usuario>,
   ) {}
 
+  async cadastrarADM(data: UsuarioAdicionarDto): Promise<any> {
+    let usuario = new Usuario();
+    let salt = 8;
+    bcrypt.hash(data.senha, salt).then((res) => {
+      usuario.senha = res
+      usuario.nome = data.nome;
+      usuario.login = data.login;
+      usuario.email = data.email;
+      return this.findCod(data.codigo)
+        .then((resC) => {
+          if (resC) {
+            let id = resC.id
+            return this.usuarioRepository
+              .update({id,},{
+                nome: usuario.nome,
+                login: usuario.login,
+                senha: usuario.senha,
+                email: usuario.email,
+                telefone: '',
+                descricaoAnalise: '',
+                descricaoSaude: '',
+                disc: '',
+                ocupacao: '',
+                perfil: '',
+                saude: '',
+              })
+              .then((resI) => {
+                return <ResultadoDto>{
+                  mensagem: 'Adm cadastrado com sucesso',
+                };
+              })
+              .catch((err) => {
+                return <ResultadoDto>{
+                  mensagem: 'Houve um erro ao cadastrar o adm',
+                };
+              });
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    });
+  }
+
+  async adicionarADM(
+    data: UsuarioAdicionarDto,
+  ): Promise<Usuario | ResultadoDto> {
+    let usuario = new Usuario();
+    usuario.codigo = data.codigo;
+    usuario.papel = 'adm';
+    usuario.nome = '';
+    usuario.descricaoAnalise = '';
+    usuario.descricaoSaude = '';
+    usuario.disc = '';
+    usuario.email = '';
+    usuario.login = '';
+    usuario.ocupacao = '';
+    usuario.ocupacao = '';
+    usuario.perfil = '';
+    usuario.saude = '';
+    usuario.senha = '';
+    usuario.telefone = '';
+    return this.usuarioRepository
+      .insert(usuario)
+      .then((res) => {
+        return this.findCod(usuario.codigo);
+      })
+      .catch((err) => {
+        return <ResultadoDto>{
+          mensagem: 'Houve um erro ao adicionar o adm',
+        };
+      });
+  }
+
   async loginAdm(adm: any): Promise<any> {
-    return this.usuarioRepository.findOneBy ({id: 1}).then((res)=>{
-      if(bcrypt.compareSync(adm.senha, res.senha)){
-        return <ResultadoDto>{
-          status: true,
-          mensagem: 'Adm logado com sucesso',
-        };
-      } else {
-        return <ResultadoDto>{
-          status: false,
-          mensagem: 'Adm não localizado',
-        };
-      }
-    })
+    return this.usuarioRepository
+      .find({ where: { papel: 'adm' } })
+      .then((res) => {
+        let admLog = {}
+        res.forEach((el, i) => {
+          if (bcrypt.compareSync(adm.senha, el.senha)) {
+            admLog = el
+          } 
+        });
+        if(admLog){
+          return <ResultadoDto>{
+            status: true,
+            mensagem: 'Adm logado com sucesso',
+          };
+        }else {
+          return <ResultadoDto>{
+            status: false,
+            mensagem: 'Adm não localizado',
+          };
+        }
+      });
   }
 
   async listar(): Promise<Usuario[] | undefined | ResultadoDto> {
@@ -71,6 +153,7 @@ export class UsuarioService {
         return this.findCod(usuario.codigo);
       })
       .catch((err) => {
+        console.log(err);
         return <ResultadoDto>{
           mensagem: 'Houve um erro ao adicionar',
         };
@@ -78,16 +161,16 @@ export class UsuarioService {
   }
 
   async findOne(login: string): Promise<Usuario | undefined> {
-    return this.usuarioRepository.findOneBy ({ login: login });
+    return this.usuarioRepository.findOneBy({ login: login });
   }
 
   async findCod(codigo: string): Promise<Usuario | undefined> {
-    return this.usuarioRepository.findOneBy ({ codigo: codigo });
+    return this.usuarioRepository.findOneBy({ codigo: codigo });
   }
 
   async findId(id: number): Promise<Usuario | undefined> {
     return this.usuarioRepository
-      .findOneBy ({ id: id })
+      .findOneBy({ id: id })
       .then((res) => {
         let usuario = {
           id: res.id,
@@ -181,7 +264,6 @@ export class UsuarioService {
     if (data.login) {
       const salt = 8;
       bcrypt.hash(data.senha, salt).then((hash: string) => {
-        console.log(hash);
         usuario.login = data.login;
         usuario.senha = hash;
         return this.usuarioRepository

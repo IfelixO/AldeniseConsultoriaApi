@@ -1,6 +1,7 @@
 
 export interface ProgressaoCadastrarDto{
     id: number;
+    usuario: number;
     entrada1: string;
     entrada2: string;
     entrada3: string;

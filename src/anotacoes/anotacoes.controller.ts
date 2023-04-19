@@ -14,7 +14,7 @@ export class AnotacoesController {
   }
 
   // @Put('listarADM')
-  // async listarADM(@Body() data: AnotacoesDto): Promise<Anotacoes | undefined> 
+  // async listarADM(@Body() data: AnotacoesDto): Promise<Anotacoes | undefined>
   // {
   //   return this.anotacoesService.listar(data.id);
   // }
@@ -30,12 +30,10 @@ export class AnotacoesController {
   //   return this.anotacoesService.adicionar(data.query);
   // }
 
-  // @Post('adicionarADM')
-  // async adicionarADM(
-  //   @Body() data: AnotacoesDto,
-  // ): Promise<ResultadoDto> {
-  //   return this.anotacoesService.adicionar(data);
-  // }
+  @Post('adicionarADM')
+  async adicionarADM(@Body() data: AnotacoesDto): Promise<ResultadoDto> {
+    return this.anotacoesService.adicionar(data);
+  }
 
   // @Put('resetar')
   // async resetar(@Body() data: AnotacoesDto): Promise<ResultadoDto> {

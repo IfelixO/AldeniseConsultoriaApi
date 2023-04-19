@@ -6,28 +6,31 @@ export class Progressao {
   id: number;
 
   @Column()
-  entrada1: string;
+  usuario: number;
 
   @Column()
-  entrada2: string;
+  entrada1?: string;
 
   @Column()
-  entrada3: string;
+  entrada2?: string;
 
   @Column()
-  entrada4: string;
+  entrada3?: string;
 
   @Column()
-  entrada5: string;
+  entrada4?: string;
 
   @Column()
-  entrada6: string;
+  entrada5?: string;
 
   @Column()
-  entrada7: string;
+  entrada6?: string;
 
   @Column()
-  entrada8: string;
+  entrada7?: string;
+
+  @Column()
+  entrada8?: string;
 
 
 };

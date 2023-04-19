@@ -6,20 +6,20 @@ export class Meta {
   id: number;
 
   @Column()
-  usuario: string;
+  usuario: number;
 
   @Column()
-  titulo: string;
+  titulo?: string;
 
   @Column()
-  motivacao: string;
+  motivacao?: string;
 
   @Column()
-  inicial: string;
+  inicial?: string;
 
   @Column()
-  final: string;
+  final?: string;
 
   @Column()
-  parcela: string;
+  parcela?: string;
 }

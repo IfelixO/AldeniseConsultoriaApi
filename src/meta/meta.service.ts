@@ -14,7 +14,7 @@ export class MetaService {
     ) {}
 
   async achar(data : number): Promise<Meta | undefined> {
-    let meta: Meta = await this.metaRepository.findOneBy  ({id: data})
+    let meta: Meta = await this.metaRepository.findOneBy  ({usuario: data})
     if (meta){
     return meta
     } else {
@@ -31,7 +31,6 @@ export class MetaService {
     meta.parcela = data.parcela
 
     let id = data.id
-    // console.log(id)
     return this.metaRepository.update({
       id,
     },{
@@ -51,13 +50,13 @@ export class MetaService {
 
   async adicionar(data: MetaCadastrarDto): Promise<ResultadoDto> {
     let meta = new Meta()
-    meta.id = data.id
+    meta.usuario = data.usuario
     meta.final = data.final
     meta.inicial = data.inicial
     meta.parcela = data.parcela
     meta.titulo = data.titulo
     meta.motivacao = data.motivacao
-    return this.metaRepository.insert(meta)
+    return this.metaRepository.save(meta)
     .then((res) => {
       return <ResultadoDto>{
         status: true,

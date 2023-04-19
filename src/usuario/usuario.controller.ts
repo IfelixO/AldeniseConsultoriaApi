@@ -14,7 +14,6 @@ import { UsuarioAdicionarDto } from './dto/usuario.adicionar.dto';
 import { ResultadoDto } from 'src/dto/resultado.dto';
 import { AuthGuard } from '@nestjs/passport/dist/auth.guard';
 import { AuthService } from 'src/auth/auth.service';
-import { ReturningStatementNotSupportedError } from 'typeorm';
 
 @Controller('usuario')
 export class UsuarioController {
@@ -22,9 +21,19 @@ export class UsuarioController {
     private readonly usuarioService: UsuarioService, // private authService: AuthService
   ) {}
 
+  @Post('cadastrarADM')
+  async cadastrarADM(@Body() data: any) {
+    return this.usuarioService.cadastrarADM(data);
+  }
+
+  @Post('adicionarADM')
+  async adicionarADM(@Req() data: any) {
+    return this.usuarioService.adicionarADM(data.query);
+  }
+
   @Post('loginADM')
-  async loginADM(@Req() data: any) {
-    return this.usuarioService.loginAdm(data.query);
+  async loginADM(@Body() data: any) {
+    return this.usuarioService.loginAdm(data);
   }
 
   @Get('listar')
@@ -79,13 +88,8 @@ export class UsuarioController {
   }
 
   @Post('adicionar')
-  async adicionar(@Req() data: any): Promise<Usuario | ResultadoDto> {
-    console.log(data.query);
-
-    return this.usuarioService.adicionar(data.query).then((res)=>{
-      console.log(res)
-      return res
-    })
+  async adicionar(@Body() data: any): Promise<Usuario | ResultadoDto> {
+    return this.usuarioService.adicionar(data)
   }
 
   @Put('atualizar')

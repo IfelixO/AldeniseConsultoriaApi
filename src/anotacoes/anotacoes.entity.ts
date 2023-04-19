@@ -6,6 +6,9 @@ export class Anotacoes {
   id: number;
 
   @Column()
+  usuario: number;
+
+  @Column()
   nota1: string;
 
   @Column()

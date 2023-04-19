@@ -11,8 +11,8 @@ export class CustosService {
     private custosRepository: Repository<Custos>,
   ) {}
 
-  async listar(data: any): Promise<Custos> {
-    return this.custosRepository.findOneBy ({ id: data });
+  async listar(data: number): Promise<Custos> {
+    return this.custosRepository.findOneBy({ usuario: data });
   }
 
   async atualizar(data: any): Promise<ResultadoDto> {
@@ -333,8 +333,7 @@ export class CustosService {
 
   async adicionar(data: CustosDto): Promise<ResultadoDto> {
     let custos = new Custos();
-    console.log(data);
-    custos.id = data.id;
+    custos.usuario = data.usuario;
     custos.receita = data.receita;
     custos.despesa1 = data.despesa1;
     custos.despesa2 = data.despesa2;
@@ -347,11 +346,11 @@ export class CustosService {
     custos.despesa9 = data.despesa9;
     custos.despesa10 = data.despesa10;
     return this.custosRepository
-      .insert(custos)
+      .save(custos)
       .then((res) => {
         return <ResultadoDto>{
           status: true,
-          mensagem: 'Custos adicionada',
+          mensagem: 'Custos adicionados',
         };
       })
       .catch((err) => {

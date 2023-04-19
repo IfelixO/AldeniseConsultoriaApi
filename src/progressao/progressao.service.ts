@@ -56,9 +56,19 @@ export class ProgressaoService {
 
   async adicionar(data: ProgressaoCadastrarDto): Promise<ResultadoDto> {
     let progressao = new Progressao()
-    progressao.id = data.id
-    console.log(data)
-    return this.progressaoRepository.insert(progressao)
+    progressao.usuario = data.id
+    progressao.entrada1 = ''
+    progressao.entrada2 = ''
+    progressao.entrada3 = ''
+    progressao.entrada4 = ''
+    progressao.entrada5 = ''
+    progressao.entrada6 = ''
+    progressao.entrada7 = ''
+    progressao.entrada8 = ''
+
+
+
+    return this.progressaoRepository.save(progressao)
     .then((res) => {
       return <ResultadoDto>{
         status: true,

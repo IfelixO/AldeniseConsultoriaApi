@@ -584,24 +584,54 @@ export class AnotacoesService {
     }
   }
 
-  // async adicionar(data: AnotacoesDto): Promise<ResultadoDto> {
-  //   let anotacoes = new Anotacoes()
-  //   anotacoes.id = data.id
-  //   console.log(data)
-  //   return this.anotacoesRepository.insert(anotacoes)
-  //   .then((res) => {
-  //     return <ResultadoDto>{
-  //       status: true,
-  //       mensagem: 'Anotacoes adicionada'
-  //     }
-  //   })
-  //   .catch((err) => {
-  //     return <ResultadoDto>{
-  //       status: false,
-  //       mensagem: 'Houve um erro ao adicionar'
-  //     }
-  //   })
-  // }
+  async adicionar(data: AnotacoesDto): Promise<ResultadoDto> {
+    let anotacoes = new Anotacoes()
+    anotacoes.usuario = data.id
+    anotacoes.nota1 = ''
+    anotacoes.nota2 = ''
+    anotacoes.nota3 = ''
+    anotacoes.nota4 = ''
+    anotacoes.nota5 = ''
+    anotacoes.nota6 = ''
+    anotacoes.nota7 = ''
+    anotacoes.nota8 = ''
+    anotacoes.nota9 = ''
+    anotacoes.nota10 = ''
+    anotacoes.tituloNota1 = ''
+    anotacoes.tituloNota2 = ''
+    anotacoes.tituloNota3 = ''
+    anotacoes.tituloNota4 = ''
+    anotacoes.tituloNota5 = ''
+    anotacoes.tituloNota6 = ''
+    anotacoes.tituloNota7 = ''
+    anotacoes.tituloNota8 = ''
+    anotacoes.tituloNota9 = ''
+    anotacoes.tituloNota10 = ''
+    anotacoes.dataNota1 = ''
+    anotacoes.dataNota2 = ''
+    anotacoes.dataNota3 = ''
+    anotacoes.dataNota4 = ''
+    anotacoes.dataNota5 = ''
+    anotacoes.dataNota6 = ''
+    anotacoes.dataNota7 = ''
+    anotacoes.dataNota8 = ''
+    anotacoes.dataNota9 = ''
+    anotacoes.dataNota10 = ''
+
+    return this.anotacoesRepository.save(anotacoes)
+    .then((res) => {
+      return <ResultadoDto>{
+        status: true,
+        mensagem: 'Anotacoes adicionada'
+      }
+    })
+    .catch((err) => {
+      return <ResultadoDto>{
+        status: false,
+        mensagem: 'Houve um erro ao adicionar'
+      }
+    })
+  }
 
   //   async resetar(data: AnotacoesDto): Promise<ResultadoDto> {
   //     let anotacoes = new Anotacoes()

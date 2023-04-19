@@ -9,6 +9,9 @@ export class Movimentacoes {
   entrada1: string;
 
   @Column()
+  usuario: number;
+
+  @Column()
   entrada2: string;
 
   @Column()
