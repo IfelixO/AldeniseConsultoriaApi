@@ -14,6 +14,7 @@ import { UsuarioAdicionarDto } from './dto/usuario.adicionar.dto';
 import { ResultadoDto } from 'src/dto/resultado.dto';
 import { AuthGuard } from '@nestjs/passport/dist/auth.guard';
 import { AuthService } from 'src/auth/auth.service';
+import { ReturningStatementNotSupportedError } from 'typeorm';
 
 @Controller('usuario')
 export class UsuarioController {
@@ -22,8 +23,8 @@ export class UsuarioController {
   ) {}
 
   @Post('loginADM')
-  async loginADM(@Body() data) {
-    return this.usuarioService.loginAdm(data);
+  async loginADM(@Req() data: any) {
+    return this.usuarioService.loginAdm(data.query);
   }
 
   @Get('listar')
@@ -79,9 +80,12 @@ export class UsuarioController {
 
   @Post('adicionar')
   async adicionar(@Req() data: any): Promise<Usuario | ResultadoDto> {
-    console.log(data);
+    console.log(data.query);
 
-    return this.usuarioService.adicionar(data);
+    return this.usuarioService.adicionar(data.query).then((res)=>{
+      console.log(res)
+      return res
+    })
   }
 
   @Put('atualizar')
