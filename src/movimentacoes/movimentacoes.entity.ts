@@ -6,10 +6,10 @@ export class Movimentacoes {
   id: number;
 
   @Column()
-  entrada1: string;
+  usuario: number;
 
   @Column()
-  usuario: number;
+  entrada1: string;
 
   @Column()
   entrada2: string;

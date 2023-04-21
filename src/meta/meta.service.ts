@@ -8,72 +8,73 @@ import { Meta } from './meta.entity';
 @Injectable()
 export class MetaService {
   constructor(
-    private usuarioService: UsuarioService,     
+    private usuarioService: UsuarioService,
     @Inject('META_REPOSITORY')
     private metaRepository: Repository<Meta>,
-    ) {}
+  ) {}
 
-  async achar(data : number): Promise<Meta | undefined> {
-    let meta: Meta = await this.metaRepository.findOneBy  ({usuario: data})
-    if (meta){
-    return meta
+  async achar(data: number): Promise<Meta | undefined> {
+    let meta: Meta = await this.metaRepository.findOneBy({ usuario: data });
+    if (meta) {
+      return meta;
     } else {
-      return null
+      return null;
     }
   }
 
   async configurar(data: MetaCadastrarDto): Promise<any> {
-    let meta = new Meta()
-    meta.titulo = data.titulo
-    meta.motivacao = data.motivacao
-    meta.inicial = data.inicial
-    meta.final = data.final
-    meta.parcela = data.parcela
+    let meta = new Meta();
+    meta.titulo = data.titulo;
+    meta.motivacao = data.motivacao;
+    meta.inicial = data.inicial;
+    meta.final = data.final;
+    meta.parcela = data.parcela;
+    this.metaRepository.findOneBy({ usuario: data.id }).then((res) => {
+      let id = res.id;
 
-    let id = data.id
-    return this.metaRepository.update({
-      id,
-    },{
-      titulo: meta.titulo,
-      motivacao: meta.motivacao,
-      inicial: meta.inicial,
-      final: meta.final,
-      parcela: meta.parcela,
-    })
-    .then((result) => {
-      return this.usuarioService.findId(id)
-    })
-    .catch((error) => {
-      return error
-    })
-  } 
-
-  async adicionar(data: MetaCadastrarDto): Promise<ResultadoDto> {
-    let meta = new Meta()
-    meta.usuario = data.usuario
-    meta.final = data.final
-    meta.inicial = data.inicial
-    meta.parcela = data.parcela
-    meta.titulo = data.titulo
-    meta.motivacao = data.motivacao
-    return this.metaRepository.save(meta)
-    .then((res) => {
-      return <ResultadoDto>{
-        status: true,
-        mensagem: 'Meta adicionada'
-      }
-    })
-    .catch((err) => {
-      return <ResultadoDto>{
-        status: false,
-        mensagem: 'Houve um erro ao cadastrar'
-      }
-    })
-
-    
-  } 
-
-  
+      return this.metaRepository
+        .update(
+          {
+            id,
+          },
+          {
+            titulo: meta.titulo,
+            motivacao: meta.motivacao,
+            inicial: meta.inicial,
+            final: meta.final,
+            parcela: meta.parcela,
+          },
+        )
+        .then((result) => {
+          return this.usuarioService.findId(id);
+        })
+        .catch((error) => {
+          return error;
+        });
+    });
   }
 
-
+  async adicionar(data: MetaCadastrarDto): Promise<ResultadoDto> {
+    let meta = new Meta();
+    meta.usuario = data.usuario;
+    meta.final = data.final;
+    meta.inicial = data.inicial;
+    meta.parcela = data.parcela;
+    meta.titulo = data.titulo;
+    meta.motivacao = data.motivacao;
+    return this.metaRepository
+      .save(meta)
+      .then((res) => {
+        return <ResultadoDto>{
+          status: true,
+          mensagem: 'Meta adicionada',
+        };
+      })
+      .catch((err) => {
+        return <ResultadoDto>{
+          status: false,
+          mensagem: 'Houve um erro ao cadastrar',
+        };
+      });
+  }
+}
