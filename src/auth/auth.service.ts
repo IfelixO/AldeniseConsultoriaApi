@@ -31,7 +31,9 @@ export class AuthService {
           access_token: token,
           usuario: user.nome,
           idUsuario: user.id,
-          perfil: user.perfil
+          perfil: user.perfil,
+          descricaoAnalise: user.descricaoAnalise,
+          descricaoSaude: user.descricaoSaude
         };
       }
 
