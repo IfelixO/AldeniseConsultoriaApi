@@ -90,15 +90,17 @@ export class UsuarioService {
     return this.usuarioRepository
       .find({ where: { papel: 'adm' } })
       .then((res) => {
-        let admLog = {}
+        let admLog = false
         res.forEach((el, i) => {
           if (bcrypt.compareSync(adm.senha, el.senha)) {
-            admLog = el
+            if(el.login == adm.login){
+              admLog = true
+            }
           } 
         });
         if(admLog){
           return <ResultadoDto>{
-            status: true,
+            status: false,
             mensagem: 'Adm logado com sucesso',
           };
         }else {
