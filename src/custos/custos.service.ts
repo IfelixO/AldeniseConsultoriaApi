@@ -15,7 +15,7 @@ export class CustosService {
     return this.custosRepository.findOneBy({ usuario: data });
   }
 
-  async atualizar(data: any): Promise<ResultadoDto> {
+  async atualizar(data: any): Promise<any> {
     let custos = new Custos();
     custos.receita = data.receita;
     custos.despesa1 = data.despesa1;
@@ -28,79 +28,112 @@ export class CustosService {
     custos.despesa8 = data.despesa8;
     custos.despesa9 = data.despesa9;
     custos.despesa10 = data.despesa10;
+    custos.despesa11 = data.despesa11;
+    custos.despesa12 = data.despesa12;
+    custos.despesa13 = data.despesa13;
+    custos.despesa14 = data.despesa14;
+    custos.despesa15 = data.despesa15;
     switch (data.index) {
-      case 2:
+      case 1:
         custos.despesa1 = data.despesa;
         break;
-      case 3:
+      case 2:
         custos.despesa2 = data.despesa;
         break;
-      case 4:
+      case 3:
         custos.despesa3 = data.despesa;
         break;
-      case 5:
+      case 4:
         custos.despesa4 = data.despesa;
         break;
-      case 6:
+      case 5:
         custos.despesa5 = data.despesa;
         break;
-      case 7:
+      case 6:
         custos.despesa6 = data.despesa;
         break;
-      case 8:
+      case 7:
         custos.despesa7 = data.despesa;
         break;
-      case 9:
+      case 8:
         custos.despesa8 = data.despesa;
         break;
-      case 10:
+      case 9:
         custos.despesa9 = data.despesa;
         break;
-      case 11:
+      case 10:
         custos.despesa10 = data.despesa;
+        break;
+      case 11:
+        custos.despesa11 = data.despesa;
+        break;
+      case 12:
+        custos.despesa12 = data.despesa;
+        break;
+      case 13:
+        custos.despesa13 = data.despesa;
+        break;
+      case 14:
+        custos.despesa14 = data.despesa;
+        break;
+      case 15:
+        custos.despesa15 = data.despesa;
         break;
 
       default:
         break;
     }
 
-    let id = data.id;
-    return this.custosRepository
-      .update(
-        {
-          id,
-        },
-        {
-          despesa1: custos.despesa1,
-          despesa2: custos.despesa2,
-          despesa3: custos.despesa3,
-          despesa4: custos.despesa4,
-          despesa5: custos.despesa5,
-          despesa6: custos.despesa6,
-          despesa7: custos.despesa7,
-          despesa8: custos.despesa8,
-          despesa9: custos.despesa9,
-          despesa10: custos.despesa10,
-        },
-      )
-      .then((result) => {
-        return <ResultadoDto>{
-          status: true,
-          mensagem: 'Custos atualizados',
-        };
+    this.custosRepository
+      .findOneBy({ usuario: data.id })
+      .then((res) => {
+        let id = res.id;
+
+        return this.custosRepository
+          .update(
+            {
+              id,
+            },
+            {
+              despesa1: custos.despesa1,
+              despesa2: custos.despesa2,
+              despesa3: custos.despesa3,
+              despesa4: custos.despesa4,
+              despesa5: custos.despesa5,
+              despesa6: custos.despesa6,
+              despesa7: custos.despesa7,
+              despesa8: custos.despesa8,
+              despesa9: custos.despesa9,
+              despesa10: custos.despesa10,
+              despesa11: custos.despesa11,
+              despesa12: custos.despesa12,
+              despesa13: custos.despesa13,
+              despesa14: custos.despesa14,
+              despesa15: custos.despesa15,
+            },
+          )
+          .then((result) => {
+            return <ResultadoDto>{
+              status: true,
+              mensagem: 'Custos atualizados',
+            };
+          })
+          .catch((error) => {
+            return <ResultadoDto>{
+              status: false,
+              mensagem: 'Houve um erro ao atualizar',
+            };
+          });
       })
-      .catch((error) => {
-        return <ResultadoDto>{
-          status: false,
-          mensagem: 'Houve um erro ao atualizar',
-        };
+      .catch((err) => {
+        console.log(err);
       });
   }
 
-  async excluir(data: any): Promise<ResultadoDto> {
+  async excluir(data: any): Promise<any> {
     let custos = new Custos();
     switch (data.index) {
-      case 2:
+      case 1:
         custos.despesa1 = data.despesa2;
         custos.despesa2 = data.despesa3;
         custos.despesa3 = data.despesa4;
@@ -110,9 +143,14 @@ export class CustosService {
         custos.despesa7 = data.despesa8;
         custos.despesa8 = data.despesa9;
         custos.despesa9 = data.despesa10;
-        custos.despesa10 = ` - `;
+        custos.despesa10 = data.despesa11;
+        custos.despesa11 = data.despesa12;
+        custos.despesa12 = data.despesa13;
+        custos.despesa13 = data.despesa14;
+        custos.despesa14 = data.despesa15;
+        custos.despesa15 = ` - `;
         break;
-      case 3:
+      case 2:
         custos.despesa1 = data.despesa1;
         custos.despesa2 = data.despesa3;
         custos.despesa3 = data.despesa4;
@@ -122,10 +160,15 @@ export class CustosService {
         custos.despesa7 = data.despesa8;
         custos.despesa8 = data.despesa9;
         custos.despesa9 = data.despesa10;
-        custos.despesa10 = ` - `;
+        custos.despesa10 = data.despesa11;
+        custos.despesa11 = data.despesa12;
+        custos.despesa12 = data.despesa13;
+        custos.despesa13 = data.despesa14;
+        custos.despesa14 = data.despesa15;
+        custos.despesa15 = ` - `;
 
         break;
-      case 4:
+      case 3:
         custos.despesa1 = data.despesa1;
         custos.despesa2 = data.despesa2;
         custos.despesa3 = data.despesa4;
@@ -135,10 +178,15 @@ export class CustosService {
         custos.despesa7 = data.despesa8;
         custos.despesa8 = data.despesa9;
         custos.despesa9 = data.despesa10;
-        custos.despesa10 = ` - `;
+        custos.despesa10 = data.despesa11;
+        custos.despesa11 = data.despesa12;
+        custos.despesa12 = data.despesa13;
+        custos.despesa13 = data.despesa14;
+        custos.despesa14 = data.despesa15;
+        custos.despesa15 = ` - `;
 
         break;
-      case 5:
+      case 4:
         custos.despesa1 = data.despesa1;
         custos.despesa2 = data.despesa2;
         custos.despesa3 = data.despesa3;
@@ -148,10 +196,15 @@ export class CustosService {
         custos.despesa7 = data.despesa8;
         custos.despesa8 = data.despesa9;
         custos.despesa9 = data.despesa10;
-        custos.despesa10 = ` - `;
+        custos.despesa10 = data.despesa11;
+        custos.despesa11 = data.despesa12;
+        custos.despesa12 = data.despesa13;
+        custos.despesa13 = data.despesa14;
+        custos.despesa14 = data.despesa15;
+        custos.despesa15 = ` - `;
 
         break;
-      case 6:
+      case 5:
         custos.despesa1 = data.despesa1;
         custos.despesa2 = data.despesa2;
         custos.despesa3 = data.despesa3;
@@ -161,10 +214,15 @@ export class CustosService {
         custos.despesa7 = data.despesa8;
         custos.despesa8 = data.despesa9;
         custos.despesa9 = data.despesa10;
-        custos.despesa10 = ` - `;
+        custos.despesa10 = data.despesa11;
+        custos.despesa11 = data.despesa12;
+        custos.despesa12 = data.despesa13;
+        custos.despesa13 = data.despesa14;
+        custos.despesa14 = data.despesa15;
+        custos.despesa15 = ` - `;
 
         break;
-      case 7:
+      case 6:
         custos.despesa1 = data.despesa1;
         custos.despesa2 = data.despesa2;
         custos.despesa3 = data.despesa3;
@@ -174,10 +232,15 @@ export class CustosService {
         custos.despesa7 = data.despesa8;
         custos.despesa8 = data.despesa9;
         custos.despesa9 = data.despesa10;
-        custos.despesa10 = ` - `;
+        custos.despesa10 = data.despesa11;
+        custos.despesa11 = data.despesa12;
+        custos.despesa12 = data.despesa13;
+        custos.despesa13 = data.despesa14;
+        custos.despesa14 = data.despesa15;
+        custos.despesa15 = ` - `;
 
         break;
-      case 8:
+      case 7:
         custos.despesa1 = data.despesa1;
         custos.despesa2 = data.despesa2;
         custos.despesa3 = data.despesa3;
@@ -187,7 +250,30 @@ export class CustosService {
         custos.despesa7 = data.despesa8;
         custos.despesa8 = data.despesa9;
         custos.despesa9 = data.despesa10;
-        custos.despesa10 = ` - `;
+        custos.despesa10 = data.despesa11;
+        custos.despesa11 = data.despesa12;
+        custos.despesa12 = data.despesa13;
+        custos.despesa13 = data.despesa14;
+        custos.despesa14 = data.despesa15;
+        custos.despesa15 = ` - `;
+
+        break;
+      case 8:
+        custos.despesa1 = data.despesa1;
+        custos.despesa2 = data.despesa2;
+        custos.despesa3 = data.despesa3;
+        custos.despesa4 = data.despesa4;
+        custos.despesa5 = data.despesa5;
+        custos.despesa6 = data.despesa6;
+        custos.despesa7 = data.despesa7;
+        custos.despesa8 = data.despesa9;
+        custos.despesa9 = data.despesa10;
+        custos.despesa10 = data.despesa11;
+        custos.despesa11 = data.despesa12;
+        custos.despesa12 = data.despesa13;
+        custos.despesa13 = data.despesa14;
+        custos.despesa14 = data.despesa15;
+        custos.despesa15 = ` - `;
 
         break;
       case 9:
@@ -198,9 +284,14 @@ export class CustosService {
         custos.despesa5 = data.despesa5;
         custos.despesa6 = data.despesa6;
         custos.despesa7 = data.despesa7;
-        custos.despesa8 = data.despesa9;
+        custos.despesa8 = data.despesa8;
         custos.despesa9 = data.despesa10;
-        custos.despesa10 = ` - `;
+        custos.despesa10 = data.despesa11;
+        custos.despesa11 = data.despesa12;
+        custos.despesa12 = data.despesa13;
+        custos.despesa13 = data.despesa14;
+        custos.despesa14 = data.despesa15;
+        custos.despesa15 = ` - `;
 
         break;
       case 10:
@@ -212,8 +303,13 @@ export class CustosService {
         custos.despesa6 = data.despesa6;
         custos.despesa7 = data.despesa7;
         custos.despesa8 = data.despesa8;
-        custos.despesa9 = data.despesa10;
-        custos.despesa10 = ` - `;
+        custos.despesa9 = data.despesa9;
+        custos.despesa10 = data.despesa11;
+        custos.despesa11 = data.despesa12;
+        custos.despesa12 = data.despesa13;
+        custos.despesa13 = data.despesa14;
+        custos.despesa14 = data.despesa15;
+        custos.despesa15 = ` - `;
 
         break;
       case 11:
@@ -226,7 +322,12 @@ export class CustosService {
         custos.despesa7 = data.despesa7;
         custos.despesa8 = data.despesa8;
         custos.despesa9 = data.despesa9;
-        custos.despesa10 = ` - `;
+        custos.despesa10 = data.despesa10;
+        custos.despesa11 = data.despesa12;
+        custos.despesa12 = data.despesa13;
+        custos.despesa13 = data.despesa14;
+        custos.despesa14 = data.despesa15;
+        custos.despesa15 = ` - `;
 
         break;
       case 12:
@@ -239,7 +340,12 @@ export class CustosService {
         custos.despesa7 = data.despesa7;
         custos.despesa8 = data.despesa8;
         custos.despesa9 = data.despesa9;
-        custos.despesa10 = ` - `;
+        custos.despesa10 = data.despesa10;
+        custos.despesa11 = data.despesa11;
+        custos.despesa12 = data.despesa13;
+        custos.despesa13 = data.despesa14;
+        custos.despesa14 = data.despesa15;
+        custos.despesa15 = ` - `;
 
         break;
       case 13:
@@ -252,7 +358,12 @@ export class CustosService {
         custos.despesa7 = data.despesa7;
         custos.despesa8 = data.despesa8;
         custos.despesa9 = data.despesa9;
-        custos.despesa10 = ` - `;
+        custos.despesa10 = data.despesa10;
+        custos.despesa11 = data.despesa11;
+        custos.despesa12 = data.despesa12;
+        custos.despesa13 = data.despesa14;
+        custos.despesa14 = data.despesa15;
+        custos.despesa15 = ` - `;
 
         break;
       case 14:
@@ -265,7 +376,12 @@ export class CustosService {
         custos.despesa7 = data.despesa7;
         custos.despesa8 = data.despesa8;
         custos.despesa9 = data.despesa9;
-        custos.despesa10 = ` - `;
+        custos.despesa10 = data.despesa10;
+        custos.despesa11 = data.despesa11;
+        custos.despesa12 = data.despesa12;
+        custos.despesa13 = data.despesa13;
+        custos.despesa14 = data.despesa15;
+        custos.despesa15 = ` - `;
 
         break;
       case 15:
@@ -278,56 +394,61 @@ export class CustosService {
         custos.despesa7 = data.despesa7;
         custos.despesa8 = data.despesa8;
         custos.despesa9 = data.despesa9;
-        custos.despesa10 = ` - `;
-
-        break;
-      case 16:
-        custos.despesa1 = data.despesa1;
-        custos.despesa2 = data.despesa2;
-        custos.despesa3 = data.despesa3;
-        custos.despesa4 = data.despesa4;
-        custos.despesa5 = data.despesa5;
-        custos.despesa6 = data.despesa6;
-        custos.despesa7 = data.despesa7;
-        custos.despesa8 = data.despesa8;
-        custos.despesa9 = data.despesa9;
-        custos.despesa10 = ` - `;
+        custos.despesa10 = data.despesa10;
+        custos.despesa11 = data.despesa11;
+        custos.despesa12 = data.despesa12;
+        custos.despesa13 = data.despesa13;
+        custos.despesa14 = data.despesa14;
+        custos.despesa15 = ` - `;
 
         break;
 
       default:
         break;
     }
-    let id = data.id;
-    return this.custosRepository
-      .update(
-        {
-          id,
-        },
-        {
-          despesa1: custos.despesa1,
-          despesa2: custos.despesa2,
-          despesa3: custos.despesa3,
-          despesa4: custos.despesa4,
-          despesa5: custos.despesa5,
-          despesa6: custos.despesa6,
-          despesa7: custos.despesa7,
-          despesa8: custos.despesa8,
-          despesa9: custos.despesa9,
-          despesa10: custos.despesa10,
-        },
-      )
-      .then((result) => {
-        return <ResultadoDto>{
-          status: true,
-          mensagem: 'Custo excluído',
-        };
+
+    this.custosRepository
+      .findOneBy({ usuario: data.id })
+      .then((res) => {
+        let id = res.id;
+        return this.custosRepository
+          .update(
+            {
+              id,
+            },
+            {
+              despesa1: custos.despesa1,
+              despesa2: custos.despesa2,
+              despesa3: custos.despesa3,
+              despesa4: custos.despesa4,
+              despesa5: custos.despesa5,
+              despesa6: custos.despesa6,
+              despesa7: custos.despesa7,
+              despesa8: custos.despesa8,
+              despesa9: custos.despesa9,
+              despesa10: custos.despesa10,
+              despesa11: custos.despesa11,
+              despesa12: custos.despesa12,
+              despesa13: custos.despesa13,
+              despesa14: custos.despesa14,
+              despesa15: custos.despesa15,
+            },
+          )
+          .then((result) => {
+            return <ResultadoDto>{
+              status: true,
+              mensagem: 'Custo excluído',
+            };
+          })
+          .catch((error) => {
+            return <ResultadoDto>{
+              status: false,
+              mensagem: 'Houve um erro ao excluir',
+            };
+          });
       })
-      .catch((error) => {
-        return <ResultadoDto>{
-          status: false,
-          mensagem: 'Houve um erro ao excluir',
-        };
+      .catch((err) => {
+        console.log(err);
       });
   }
 
@@ -345,6 +466,11 @@ export class CustosService {
     custos.despesa8 = data.despesa8;
     custos.despesa9 = data.despesa9;
     custos.despesa10 = data.despesa10;
+    custos.despesa11 = data.despesa11;
+    custos.despesa12 = data.despesa12;
+    custos.despesa13 = data.despesa13;
+    custos.despesa14 = data.despesa14;
+    custos.despesa15 = data.despesa15;
     return this.custosRepository
       .save(custos)
       .then((res) => {

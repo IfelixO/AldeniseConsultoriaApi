@@ -13,4 +13,9 @@ export interface CustosDto{
     despesa8: string;
     despesa9: string;
     despesa10: string;
+    despesa11: string;
+    despesa12: string;
+    despesa13: string;
+    despesa14: string;
+    despesa15: string;
 }

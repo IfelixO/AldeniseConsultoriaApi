@@ -41,5 +41,20 @@ export class Custos {
   @Column()
   despesa10: string;
 
+  @Column()
+  despesa11: string;
+
+  @Column()
+  despesa12: string;
+
+  @Column()
+  despesa13: string;
+
+  @Column()
+  despesa14: string;
+
+  @Column()
+  despesa15: string;
+
 
 }
