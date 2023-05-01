@@ -14,7 +14,6 @@ import { UsuarioAdicionarDto } from './dto/usuario.adicionar.dto';
 import { ResultadoDto } from 'src/dto/resultado.dto';
 import { AuthGuard } from '@nestjs/passport/dist/auth.guard';
 import { AuthService } from 'src/auth/auth.service';
-import { retry } from 'rxjs';
 
 @Controller('usuario')
 export class UsuarioController {
@@ -34,11 +33,7 @@ export class UsuarioController {
 
   @Post('loginADM')
   async loginADM(@Body() data: any) {
-    console.log('chegou login adm')
-    return this.usuarioService.loginAdm(data).then((res)=>{
-      console.log('foi login adm')
-      return res
-    })
+    return this.usuarioService.loginAdm(data);
   }
 
   @Get('listar')
