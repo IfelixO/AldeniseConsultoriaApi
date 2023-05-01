@@ -15,7 +15,7 @@ export class CustosService {
     return this.custosRepository.findOneBy({ usuario: data });
   }
 
-  async atualizar(data: any): Promise<any> {
+  async atualizar(data: any): Promise<ResultadoDto> {
     let custos = new Custos();
     custos.receita = data.receita;
     custos.despesa1 = data.despesa1;
@@ -33,100 +33,96 @@ export class CustosService {
     custos.despesa13 = data.despesa13;
     custos.despesa14 = data.despesa14;
     custos.despesa15 = data.despesa15;
-    switch (data.index) {
-      case 1:
-        custos.despesa1 = data.despesa;
-        break;
-      case 2:
-        custos.despesa2 = data.despesa;
-        break;
-      case 3:
-        custos.despesa3 = data.despesa;
-        break;
-      case 4:
-        custos.despesa4 = data.despesa;
-        break;
-      case 5:
-        custos.despesa5 = data.despesa;
-        break;
-      case 6:
-        custos.despesa6 = data.despesa;
-        break;
-      case 7:
-        custos.despesa7 = data.despesa;
-        break;
-      case 8:
-        custos.despesa8 = data.despesa;
-        break;
-      case 9:
-        custos.despesa9 = data.despesa;
-        break;
-      case 10:
-        custos.despesa10 = data.despesa;
-        break;
-      case 11:
-        custos.despesa11 = data.despesa;
-        break;
-      case 12:
-        custos.despesa12 = data.despesa;
-        break;
-      case 13:
-        custos.despesa13 = data.despesa;
-        break;
-      case 14:
-        custos.despesa14 = data.despesa;
-        break;
-      case 15:
-        custos.despesa15 = data.despesa;
-        break;
 
-      default:
-        break;
+    if (data.index) {
+      switch (data.index) {
+        case 1:
+          custos.despesa1 = data.despesa;
+          break;
+        case 2:
+          custos.despesa2 = data.despesa;
+          break;
+        case 3:
+          custos.despesa3 = data.despesa;
+          break;
+        case 4:
+          custos.despesa4 = data.despesa;
+          break;
+        case 5:
+          custos.despesa5 = data.despesa;
+          break;
+        case 6:
+          custos.despesa6 = data.despesa;
+          break;
+        case 7:
+          custos.despesa7 = data.despesa;
+          break;
+        case 8:
+          custos.despesa8 = data.despesa;
+          break;
+        case 9:
+          custos.despesa9 = data.despesa;
+          break;
+        case 10:
+          custos.despesa10 = data.despesa;
+          break;
+        case 11:
+          custos.despesa11 = data.despesa;
+          break;
+        case 12:
+          custos.despesa12 = data.despesa;
+          break;
+        case 13:
+          custos.despesa13 = data.despesa;
+          break;
+        case 14:
+          custos.despesa14 = data.despesa;
+          break;
+        case 15:
+          custos.despesa15 = data.despesa;
+          break;
+
+        default:
+          break;
+      }
     }
 
-    this.custosRepository
-      .findOneBy({ usuario: data.id })
-      .then((res) => {
-        let id = res.id;
+    let id = data.id;
 
-        return this.custosRepository
-          .update(
-            {
-              id,
-            },
-            {
-              despesa1: custos.despesa1,
-              despesa2: custos.despesa2,
-              despesa3: custos.despesa3,
-              despesa4: custos.despesa4,
-              despesa5: custos.despesa5,
-              despesa6: custos.despesa6,
-              despesa7: custos.despesa7,
-              despesa8: custos.despesa8,
-              despesa9: custos.despesa9,
-              despesa10: custos.despesa10,
-              despesa11: custos.despesa11,
-              despesa12: custos.despesa12,
-              despesa13: custos.despesa13,
-              despesa14: custos.despesa14,
-              despesa15: custos.despesa15,
-            },
-          )
-          .then((result) => {
-            return <ResultadoDto>{
-              status: true,
-              mensagem: 'Custos atualizados',
-            };
-          })
-          .catch((error) => {
-            return <ResultadoDto>{
-              status: false,
-              mensagem: 'Houve um erro ao atualizar',
-            };
-          });
+    return this.custosRepository
+      .update(
+        {
+          id,
+        },
+        {
+          despesa1: custos.despesa1,
+          despesa2: custos.despesa2,
+          despesa3: custos.despesa3,
+          despesa4: custos.despesa4,
+          despesa5: custos.despesa5,
+          despesa6: custos.despesa6,
+          despesa7: custos.despesa7,
+          despesa8: custos.despesa8,
+          despesa9: custos.despesa9,
+          despesa10: custos.despesa10,
+          despesa11: custos.despesa11,
+          despesa12: custos.despesa12,
+          despesa13: custos.despesa13,
+          despesa14: custos.despesa14,
+          despesa15: custos.despesa15,
+        },
+      )
+      .then((result) => {
+        return <ResultadoDto>{
+          status: true,
+          mensagem: 'Custos atualizados',
+        };
       })
-      .catch((err) => {
-        console.log(err);
+      .catch((error) => {
+        return <ResultadoDto>{
+          status: false,
+          mensagem: 'Houve um erro ao atualizar',
+        };
       });
   }
 
@@ -407,49 +403,47 @@ export class CustosService {
         break;
     }
 
-    this.custosRepository
-      .findOneBy({ usuario: data.id })
-      .then((res) => {
-        let id = res.id;
-        return this.custosRepository
-          .update(
-            {
-              id,
-            },
-            {
-              despesa1: custos.despesa1,
-              despesa2: custos.despesa2,
-              despesa3: custos.despesa3,
-              despesa4: custos.despesa4,
-              despesa5: custos.despesa5,
-              despesa6: custos.despesa6,
-              despesa7: custos.despesa7,
-              despesa8: custos.despesa8,
-              despesa9: custos.despesa9,
-              despesa10: custos.despesa10,
-              despesa11: custos.despesa11,
-              despesa12: custos.despesa12,
-              despesa13: custos.despesa13,
-              despesa14: custos.despesa14,
-              despesa15: custos.despesa15,
-            },
-          )
-          .then((result) => {
-            return <ResultadoDto>{
-              status: true,
-              mensagem: 'Custo excluído',
-            };
-          })
-          .catch((error) => {
-            return <ResultadoDto>{
-              status: false,
-              mensagem: 'Houve um erro ao excluir',
-            };
-          });
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    this.custosRepository.findOneBy({usuario: data.id}).then((res)=>{
+      let id = res.id;
+      return this.custosRepository
+        .update(
+          {
+            id,
+          },
+          {
+            despesa1: custos.despesa1,
+            despesa2: custos.despesa2,
+            despesa3: custos.despesa3,
+            despesa4: custos.despesa4,
+            despesa5: custos.despesa5,
+            despesa6: custos.despesa6,
+            despesa7: custos.despesa7,
+            despesa8: custos.despesa8,
+            despesa9: custos.despesa9,
+            despesa10: custos.despesa10,
+            despesa11: custos.despesa11,
+            despesa12: custos.despesa12,
+            despesa13: custos.despesa13,
+            despesa14: custos.despesa14,
+            despesa15: custos.despesa15,
+          },
+        )
+        .then((result) => {
+          return <ResultadoDto>{
+            status: true,
+            mensagem: 'Custo excluído',
+          };
+        })
+        .catch((error) => {
+          return <ResultadoDto>{
+            status: false,
+            mensagem: 'Houve um erro ao excluir',
+          };
+        });
+
+
+    })
+
   }
 
   async adicionar(data: CustosDto): Promise<ResultadoDto> {
