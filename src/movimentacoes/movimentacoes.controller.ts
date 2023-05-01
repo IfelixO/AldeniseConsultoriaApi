@@ -8,24 +8,30 @@ import { ResultadoDto } from 'src/dto/resultado.dto';
 export class MovimentacoesController {
   constructor(private readonly movimentacoesService: MovimentacoesService) {}
 
-
-    @Get('listar')
-    async listar(@Req() data: any):Promise<Movimentacoes | undefined>{
-      return this.movimentacoesService.listar(data.query.id)
+  @Get('listar')
+  async listar(@Req() data: any): Promise<Movimentacoes | undefined> {
+    return this.movimentacoesService.listar(data.query.id);
   }
 
-    @Put ('atualizar')
-    async atualizar(@Body() data: MovimentacoesDto ):Promise<ResultadoDto>{
-      return this.movimentacoesService.atualizar(data)
-    }
-
-    @Post ('adicionar')
-    async adicionar(@Req() data: any ): Promise<ResultadoDto>{
-      return this.movimentacoesService.adicionar(data.query)
-    }
-    
-    @Post ('adicionarADM')
-    async adicionarADM(@Body() data: MovimentacoesDto ): Promise<ResultadoDto>{
-      return this.movimentacoesService.adicionar(data)
-    }
+  @Put('listarADM')
+  async listarADM(
+    @Body() data: MovimentacoesDto,
+  ): Promise<Movimentacoes | undefined> {
+    return this.movimentacoesService.listar(data.id);
   }
+
+  @Put('atualizar')
+  async atualizar(@Body() data: MovimentacoesDto): Promise<ResultadoDto> {
+    return this.movimentacoesService.atualizar(data);
+  }
+
+  @Post('adicionar')
+  async adicionar(@Req() data: any): Promise<ResultadoDto> {
+    return this.movimentacoesService.adicionar(data.query);
+  }
+
+  @Post('adicionarADM')
+  async adicionarADM(@Body() data: MovimentacoesDto): Promise<ResultadoDto> {
+    return this.movimentacoesService.adicionar(data);
+  }
+}
