@@ -10,9 +10,9 @@ export class CustosController {
 
   @Get('listar')
   async listar(@Req() data: any): Promise<Custos | undefined> {
-    console.log('chegou listar custos')
+    // console.log('chegou listar custos')
     return this.custosService.listar(Number(data.query.id)).then((res)=>{
-      console.log('foi listar custos')
+      // console.log('foi listar custos')
       return res
     })
   }
