@@ -99,12 +99,12 @@ export class UsuarioService {
           } 
         });
         if(admLog){
-          return <ResultadoDto>{
-            status: false,
+    return <ResultadoDto>{
+            status: true,
             mensagem: 'Adm logado com sucesso',
           };
         }else {
-          return <ResultadoDto>{
+    return <ResultadoDto>{
             status: false,
             mensagem: 'Adm não localizado',
           };

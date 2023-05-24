@@ -13,11 +13,11 @@ export class AnotacoesController {
     return this.anotacoesService.listar(data.query.id);
   }
 
-  // @Put('listarADM')
-  // async listarADM(@Body() data: AnotacoesDto): Promise<Anotacoes | undefined>
-  // {
-  //   return this.anotacoesService.listar(data.id);
-  // }
+  @Put('listarADM')
+  async listarADM(@Body() data: AnotacoesDto): Promise<Anotacoes | undefined>
+  {
+    return this.anotacoesService.listar(data.id);
+  }
 
   @Put('atualizar')
   async atualizar(@Body() data: any): Promise<ResultadoDto> {
